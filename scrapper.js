@@ -5,7 +5,7 @@ const userAgent = require('user-agents');
 
 // https://www3.gogoanimes.fi/
 // https://gogoanime.run
-const baseUrl = "https://gogoanime.run"
+const baseUrl = "https://www3.gogoanimes.fi"
 
 async function newSeason(page) {
     var anime_list = []
@@ -16,8 +16,8 @@ async function newSeason(page) {
     const $ = cheerio.load(body)
 
     $('div.main_body div.last_episodes ul.items li').each((index, element) => {
-        $elements = $(element)
-        name = $elements.find('p').find('a')
+        let $elements = $(element)
+        let name = $elements.find('p').find('a')
         img = $elements.find('div').find('a').find('img').attr('src')
         link = $elements.find('div').find('a').attr('href')
         anime_name = { 'name': name.html(), 'img_url': img, 'anime_id': link.slice(10,) }
@@ -25,7 +25,7 @@ async function newSeason(page) {
 
     })
 
-    return await (anime_list)
+    return (anime_list)
 }
 
 
@@ -39,7 +39,7 @@ async function popular(page) {
 
     $('div.main_body div.last_episodes ul.items li').each((index, element) => {
         $elements = $(element)
-        name = $elements.find('p').find('a')
+        let name = $elements.find('p').find('a')
         img = $elements.find('div').find('a').find('img').attr('src')
         link = $elements.find('div').find('a').attr('href')
         anime_name = { 'name': name.html(), 'img_url': img, 'anime_id': link.slice(10,) }
@@ -60,7 +60,7 @@ async function search(query) {
 
     $('div.main_body div.last_episodes ul.items li').each((index, element) => {
         $elements = $(element)
-        name = $elements.find('p').find('a')
+        let name = $elements.find('p').find('a')
         img = $elements.find('div').find('a').find('img').attr('src')
         link = $elements.find('div').find('a').attr('href')
         anime_name = { 'name': name.html(), 'img_url': img, 'anime_id': link.slice(10,) }
@@ -68,7 +68,7 @@ async function search(query) {
 
     })
 
-    return await (anime_list)
+    return (anime_list)
 }
 
 async function anime(_anime_name) {
